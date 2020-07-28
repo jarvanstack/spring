@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="addr" class="com.bmft.pojo.Address">
+        <property name="address" value="New York"/>
+    </bean>
+    <bean class="com.bmft.pojo.Student" id="test01">
+        <!--1.常量注入-->
+        <property name="name" value="bmft"/>
+        <!--        2.bean注入-->
+        <!--        注意：这个引用在上面bean-->
+        <property name="address" ref="addr"/>
+        <!--        3. 数组注入-->
+        <property name="books">
+            <array>
+                <value>三国演义</value>
+                <value>水浒传</value>
+                <value>红楼梦</value>
+                <value>西游记</value>
+            </array>
+        </property>
+        <!--        4. list注入-->
+        <property name="hobbys">
+            <list>
+                <value>吃饭</value>
+                <value>碎觉</value>
+                <value>打豆豆</value>
+            </list>
+        </property>
+        <!--        5. map 注入-->
+        <property name="card">
+            <map>
+                <entry key="hi" value="hello"/>
+                <entry key="good" value="better"/>
+                <entry key="nice" value="fine"/>
+            </map>
+        </property>
+        <!--        6. set注入-->
+        <property name="games">
+            <set>
+                <value>王者荣耀</value>
+                <value>LOL</value>
+                <value>球球</value>
+            </set>
+        </property>
+        <!--        7. null 注入 -->
+        <property name="wife">
+            <null/>
+        </property>
+        <!--        8.properties注入-->
+        <property name="info">
+            <props>
+                <prop key="id">1</prop>
+                <prop key="name">123456</prop>
+                <prop key="password">123456</prop>
+            </props>
+        </property>
+    </bean>
+    <!--   拓展cp =======================-->
+    <bean id="test02" class="com.bmft.pojo.User" p:name="bmft" p:password="123456"/>
+    <bean id="test03" class="com.bmft.pojo.User" c:name="hhhh" c:password="mmmm"/>
+    <!--   bean生命周期单例模式和原型模式 =======================-->
+    <!--    默认是单例模式-->
+    <bean id="test04" class="com.bmft.pojo.User" p:name="bmft" p:password="123456" scope="singleton"/>
+    <bean id="test05" class="com.bmft.pojo.User" c:name="hhhh" c:password="mmmm" scope="prototype"/>
+</beans>

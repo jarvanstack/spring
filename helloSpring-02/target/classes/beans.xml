@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--bean就是java对象 , 由Spring创建和管理-->
+    <!---->
+    <bean id="hello" class="com.bmft.pojo.Hello">
+        <!--property是给这个可以set值，感觉也没啥用-->
+        <property name="name" value="HelloSpring"/>
+    </bean>
+    <!--==============优化IOC原理-01的问题========-->
+    <bean id="mysql" class="com.bmft.dao.UserDaoMysqlImpl">
+
+    </bean>
+    <bean id="oracle" class="com.bmft.dao.UserDaoOrancleImpl">
+    </bean>
+    <!--==============spring 有参构造3种方法参考博客，这个不知道有啥用========-->
+    <bean id="hello2" class="com.bmft.pojo.Hello">
+        <constructor-arg name="name" value="你好Spring"/>
+        <!--区别于property，这个是构造，那个是set-->
+    </bean>
+    <!--=========Spring 配置,===========-->
+    <!--1. alias取别名-->
+    <alias name="hello" alias="aliasHello"/>
+    <!--2. bean配置-->
+    <bean id="config_bean" class="com.bmft.pojo.Hello" name="config_bean1,config_bean2;config_bean3">
+
+    </bean>
+</beans>

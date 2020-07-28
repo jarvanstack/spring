@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--这里个xml展示手动配置-->
+    <bean id="cat" class="com.bmft.pojo.Cat"/>
+    <bean id="dog" class="com.bmft.pojo.Dog"/>
+    <bean id="person" class="com.bmft.pojo.Person">
+        <property name="name" value="bmft"/>
+        <property name="cat" ref="cat"/>
+        <property name="dog" ref="dog"/>
+    </bean>
+</beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--【被关联的mybatis配置-建议保留设置和别名和dao mapper映射】-->
+    <settings>
+        <!--普通的日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--起别名-->
+    <typeAliases>
+        <package name="com.bmft.pojo"/>
+    </typeAliases>
+    <!--注册mapper-->
+    <mappers>
+        <package name="com.bmft.dao"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--注册bean-->
+    <bean id="userService" class="com.bmft.service.UserServiceImpl"/>
+    <bean id="log" class="com.bmft.proxy.Log"/>
+    <bean id="afterLog" class="com.bmft.proxy.LogAfter"/>
+
+    <!--aop的配置-->
+    <aop:config>
+        <!--切入点-->
+        <!--这个表达式,作用是构造  【房东】-->
+        <aop:pointcut id="pointcut" expression="execution(* com.bmft.service.UserServiceImpl.*(..))"/>
+        <!--切入的方法-->
+        <aop:advisor advice-ref="afterLog" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>
+    </aop:config>
+
+    <!--    ==========================方式二、自定义切入点=========-->
+    <bean id="diy" class="com.bmft.aop02.DiyPointCut"/>
+    <bean id="test02" class="com.bmft.aop02.UserServiceImpl2"/>
+    <aop:config>
+        <aop:aspect ref="diy">
+            <!--execution表达式的顺序就是方法的顺序 * 返回类型所有 -->
+            <!--            com.bmft.aop02.DiyPointCut 类的完整路径-->
+            <!--            * 所有方法-->
+            <!--            (..) 所有参数-->
+            <aop:pointcut id="diyPointcut" expression=" execution(* com.bmft.aop02.UserServiceImpl2.*(..))"/>
+            <aop:before method="before" pointcut-ref="diyPointcut"/>
+            <aop:after method="after" pointcut-ref="diyPointcut"/>
+        </aop:aspect>
+    </aop:config>
+    <!--    ==========================方式二、自定义切入点=========-->
+    <bean id="diy03" class="com.bmft.aop03.DiyAnnoProxy"/>
+    <bean id="test03" class="com.bmft.aop03.UserServiceImpl03"/>
+    <!--    自动代理-->
+    <aop:aspectj-autoproxy/>
+
+</beans>
