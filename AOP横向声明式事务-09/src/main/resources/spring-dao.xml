@@ -34,25 +34,7 @@
         <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
     </bean>
 
-    <!--    =====================事务=============-->
-    <!--    1.jdbc 事务管理器 ，写死的-->
-    <bean id="txManager"
-          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
-    <!-- 2.配置事务通知 id -->
-    <!--id随意这里是官方的名字 事务切入-->
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-            <!--配置哪些方法使用什么样的事务,配置事务的传播特性-->
-            <tx:method name="*" propagation="REQUIRED"/>
-        </tx:attributes>
-    </tx:advice>
-    <!--    3.配置AOP织入-->
-    <aop:config>
-        <aop:pointcut id="txPointCut" expression="execution(* com.bmft.service.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointCut"/>
-    </aop:config>
+
     <!--    转配测试service-->
     <bean id="service" class="com.bmft.service.UserService">
         <property name="userMapper" ref="userMapperImpl"/>

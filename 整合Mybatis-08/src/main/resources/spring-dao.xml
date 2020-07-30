@@ -22,6 +22,7 @@
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg index="0" ref="sqlSessionFactory"/>
     </bean>
+<!--    ========这里是手动注入，mvc整合的时候可以自动注入===========-->
     <!--4.注册实现类-->
     <bean id="userMapperImpl" class="com.bmft.dao.UserMapperImpl">
         <property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
